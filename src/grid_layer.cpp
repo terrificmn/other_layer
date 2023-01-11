@@ -13,6 +13,8 @@ GridLayer::GridLayer() {}
 void GridLayer::onInitialize() {
     ros::NodeHandle nh("~/" + name_);
     current_ = true;
+    std::string test_string;
+    nh.param("test_param", test_string, std::string("testtest"));
     default_value_ = NO_INFORMATION;
     matchSize();
 

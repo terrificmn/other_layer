@@ -1,0 +1,19 @@
+#### 예제; 정확히는 여기말고 런치파일을 하나 만들고 해당 런치파일에서 move_base관련 노드를 실행시키면서 
+#### 지금 config 디렉토리를 참조하게 하면 된다.. 일반적인 move_base용 런치파일이 필요함
+
+global_costmap:
+  global_frame: map
+  robot_base_frame: base_link
+
+  update_frequency: 5.0
+  publish_frequency: 5.0
+  transform_tolerance: 0.4
+
+  static_map: true
+
+  plugins:
+    - {name: static,         type: "costmap_2d::StaticLayer"}
+    - {name: obstacles_layer,      type: "costmap_2d::ObstacleLayer"}
+    - {name: inflation_layer,      type: "costmap_2d::InflationLayer"}
+    ### grid_layer 의 이름으로 (costmap_common_params.yaml에서 name을 grid_layer로 설정)
+    - {name: grid_layer,    type: "costmap_2d::GridLayer"}

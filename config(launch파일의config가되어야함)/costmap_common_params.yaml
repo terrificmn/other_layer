@@ -1,0 +1,26 @@
+#### 예제; 정확히는 여기말고 런치파일을 하나 만들고 해당 런치파일에서 move_base관련 노드를 실행시키면서 
+#### 지금 config 디렉토리를 참조하게 하면 된다.. 일반적인 move_base용 런치파일이 필요함
+
+footprint: [[-0.48, -0.31], [-0.48, 0.31], [0.13, 0.31], [0.13, -0.31]]
+
+map_type: costmap
+
+## layer definitions
+static:
+    map_topic: map
+
+obstacles_layer:
+    observation_sources: laser
+    laser: {sensor_frame: "laser_link", data_type: LaserScan, clearing: true, marking: true, topic: scan, 
+            track_unknown_space: true, observation_persistence: 0.0, expected_update_rate: 0.0,
+            obstacle_range: 4.0, raytrace_range: 4.5,
+            Inf_is_valid: true
+            }
+
+inflation_layer:
+  cost_scaling_factor:  5.4  ## 4.3 // exponential rate at which the obstacle cost drops off (default: 10)
+  inflation_radius: 0.82      ## 0.88
+
+# cost_map에 추가를 했을 경우 GridLayer에 parameter를 지정해준다 
+grid_layer:
+  test_param: "void_test"
